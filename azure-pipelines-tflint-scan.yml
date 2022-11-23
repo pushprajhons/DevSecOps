@@ -4,7 +4,7 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+- tflint-scan
 
 pool:
   vmImage: ubuntu-latest
@@ -20,9 +20,11 @@ stages:
       # warn about deprecated syntax, unused declarations, and enforce best practices, naming conventions.
       - script: |
           mkdir TFLintReport
-          docker pull wata727/tflint
-          docker run --rm --volume $(System.DefaultWorkingDirectory)/terraform:/data -t wata727/tflint --module --format junit > $(System.DefaultWorkingDirectory)/TFLintReport/TFLint-Report.xml
+          #docker pull wata727/tflint
+          # docker run --rm --volume $(System.DefaultWorkingDirectory)/terraform:/data -t wata727/tflint --module --format junit > $(System.DefaultWorkingDirectory)/TFLintReport/TFLint-Report.xml
           # docker run -v $(System.DefaultWorkingDirectory)/terraform:/data -t wata727/tflint --module
+          docker pull ghcr.io/terraform-linters/tflint:latest
+          docker run --rm -v $(System.DefaultWorkingDirectory)/terraform:/data -t ghcr.io/terraform-linters/tflint:latest
         displayName: 'TFLint Static Code Analysis'
         name: TFLintScan
         condition: always()
