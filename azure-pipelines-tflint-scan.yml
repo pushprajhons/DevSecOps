@@ -24,7 +24,7 @@ stages:
           # docker run --rm --volume $(System.DefaultWorkingDirectory)/terraform:/data -t wata727/tflint --module --format junit > $(System.DefaultWorkingDirectory)/TFLintReport/TFLint-Report.xml
           # docker run -v $(System.DefaultWorkingDirectory)/terraform:/data -t wata727/tflint --module
           docker pull ghcr.io/terraform-linters/tflint:latest
-          docker run --rm -v $(System.DefaultWorkingDirectory)/terraform:/data -t ghcr.io/terraform-linters/tflint:latest
+          docker run --rm -v $(System.DefaultWorkingDirectory)/terraform:/data -t ghcr.io/terraform-linters/tflint:latest --module --format junit > $(System.DefaultWorkingDirectory)/TFLintReport/TFLint-Report.xml
         displayName: 'TFLint Static Code Analysis'
         name: TFLintScan
         condition: always()
