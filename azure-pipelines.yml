@@ -42,7 +42,7 @@ stages:
         inputs:
           testResultsFormat: 'JUnit' # Options JUnit, NUnit, VSTest, xUnit, cTest
           testResultsFiles: '**/*TFLint-Report.xml'
-          searchFolder: '$(System.DefaultWorkingDirectory)/CheckovTFLintReportReport'
+          searchFolder: '$(System.DefaultWorkingDirectory)/TFLintReport'
           mergeTestResults: false
           testRunTitle: TFLint Scan
           failTaskOnFailedTests: false
