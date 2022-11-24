@@ -19,8 +19,8 @@ stages:
       - script: | 
           mkdir TerraScanReport
           docker pull accurics/terrascan
-          #docker run --rm --volume $(System.DefaultWorkingDirectory)/terraform/azure:/iac --workdir /iac accurics/terrascan:latest scan --iac-type terraform --policy-type all --verbose --output xml > $(System.DefaultWorkingDirectory)/TerraScanReport/TerraScan-Report.xml
-          docker run --rm --volume $(System.DefaultWorkingDirectory)/terraform/azure:/iac --workdir /iac accurics/terrascan:latest scan --iac-type terraform --policy-type all --verbose
+          docker run --rm --volume $(System.DefaultWorkingDirectory)/terraform/azure:/iac --workdir /iac accurics/terrascan:latest scan --iac-type terraform --policy-type all --verbose --output xml > $(System.DefaultWorkingDirectory)/TerraScanReport/TerraScan-Report.xml
+          # docker run --rm --volume $(System.DefaultWorkingDirectory)/terraform/azure:/iac --workdir /iac accurics/terrascan:latest scan --iac-type terraform --policy-type all --verbose
         displayName: 'Accurics TerraScan Code Analysis'
       
       - script: |
@@ -31,7 +31,7 @@ stages:
       
       # Publish the TerraScan report as an artifact to Azure Pipelines
       - task: PublishBuildArtifacts@1
-        displayName: 'Publish Artifact: Terrascan Report'
+        displayName: 'Publish Artifact Terrascan Report'
         condition: succeededOrFailed()
         inputs:
           PathtoPublish: '$(System.DefaultWorkingDirectory)/TerraScanReport'
